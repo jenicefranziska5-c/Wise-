@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Scam Report Help Center</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f7fa;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #1e88e5;
+      color: white;
+      text-align: center;
+      width: 100%;
+      padding: 20px 0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    #time {
+      font-size: 18px;
+      margin-top: 8px;
+    }
+
+    main {
+      background: white;
+      padding: 20px;
+      margin-top: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      width: 90%;
+      max-width: 420px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    #paypalInfo {
+      margin-top: 10px;
+      background-color: #e3f2fd;
+      color: #0d47a1;
+      padding: 10px;
+      border-radius: 5px;
+      display: none;
+      text-align: center;
+      font-size: 15px;
+    }
+
+    button {
+      margin-top: 20px;
+      width: 100%;
+      background-color: #1e88e5;
+      color: white;
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #1565c0;
+    }
+
+    .message {
+      margin-top: 20px;
+      background: #dff0d8;
+      color: #3c763d;
+      padding: 12px;
+      border-radius: 5px;
+      text-align: center;
+      display: none;
+    }
+
+    .section-title {
+      text-align: center;
+      margin-bottom: 10px;
+      color: #333;
+    }
+
+    .records {
+      background: #f9f9f9;
+      border-left: 4px solid #1e88e5;
+      padding: 15px;
+      border-radius: 6px;
+      margin-bottom: 20px;
+      font-size: 15px;
+    }
+
+    .disclaimer {
+      margin-top: 20px;
+      font-size: 14px;
+      color: #555;
+      text-align: center;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 13px;
+      color: #666;
+      margin: 30px 0 10px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Scam Report Help Center</h1>
+    <div id="time">Loading current time...</div>
+  </header>
+
+  <main>
+    <h2 class="section-title">Helping Victims Recover Their Funds</h2>
+
+    <div class="records">
+      <p><strong>Recent Recoveries:</strong></p>
+      <ul>
+        <li>₦450,000 recovered for a PayPal scam victim – March 2025</li>
+        <li>$1,200 recovered via bank transfer – May 2025</li>
+        <li>₦320,000 returned after crypto scam report – July 2025</li>
+      </ul>
+      <p>Our goal is to help victims report and recover from scam incidents safely and quickly.</p>
+    </div>
+
+    <h2>Report Lost Funds</h2>
+    <form id="reportForm">
+      <label for="amount">Amount Lost (₦):</label>
+      <input type="number" id="amount" name="amount" required placeholder="Enter amount lost" />
+
+      <label for="paymentType">Type of Payment:</label>
+      <select id="paymentType" name="paymentType" required>
+        <option value="">--Select--</option>
+        <option value="bank">Bank Transfer</option>
+        <option value="paypal">PayPal</option>
+        <option value="other">Other</option>
+      </select>
+
+      <div id="paypalInfo">
+        💳 Please send your report details via PayPal to:<br>
+        <strong>mcastillo@email.de</strong>
+      </div>
+
+      <button type="submit">Submit Report</button>
+    </form>
+
+    <div class="message" id="successMessage">
+      ✅ Your complaint is submitted!  
+      <br><small>We’ll contact you within 3 days.</small>
+    </div>
+
+    <p class="disclaimer">
+      ⚠️ Disclaimer: Your report will be reviewed, and you’ll be contacted within 3 business days.
+    </p>
+
+    <p class="disclaimer">
+      Service fee $1000
+    </p>
+  </main>
+
+  <footer>
+    This page only assists Matt Rife fans community against scam! USA ©2025
+  </footer>
+
+  <script>
+    function updateTime() {
+      const timeElement = document.getElementById("time");
+      const now = new Date();
+      timeElement.textContent = "Current time: " + now.toLocaleTimeString();
+    }
+    setInterval(updateTime, 1000);
+    updateTime();
+
+    const paymentType = document.getElementById("paymentType");
+    const paypalInfo = document.getElementById("paypalInfo");
+
+    paymentType.addEventListener("change", function() {
+      paypalInfo.style.display = (this.value === "paypal") ? "block" : "none";
+    });
+
+    document.getElementById("reportForm").addEventListener("submit", function(event) {
+      event.preventDefault();
+      document.getElementById("reportForm").reset();
+      paypalInfo.style.display = "none";
+      document.getElementById("successMessage").style.display = "block";
+    });
+  </script>
+</body>
+  </html>
