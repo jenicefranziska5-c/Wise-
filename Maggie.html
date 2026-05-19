@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maggie Waldrop | NYSE Certified Brokerage</title>
+    <style>
+        :root {
+            --primary-blue: #0f172a;
+            --accent-blue: #2563eb;
+            --light-blue: #3b82f6;
+            --gold-accent: #d97706;
+            --bg-gray: #f8fafc;
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-color: #e2e8f0;
+            --success-green: #10b981;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-gray);
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        .top-ticker-bar {
+            background-color: var(--primary-blue);
+            color: #ffffff;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid var(--gold-accent);
+        }
+
+        .ticker-wrap {
+            display: flex;
+            gap: 20px;
+            overflow: hidden;
+        }
+
+        .ticker-item {
+            display: flex;
+            gap: 5px;
+        }
+
+        .text-up { color: var(--success-green); font-weight: bold; }
+
+        nav {
+            background-color: #ffffff;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .logo-area h1 {
+            font-size: 1.3rem;
+            color: var(--primary-blue);
+            letter-spacing: 0.5px;
+        }
+
+        .logo-area span {
+            font-size: 0.75rem;
+            color: var(--gold-accent);
+            display: block;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 5px 10px;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--accent-blue);
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: #ffffff;
+            padding: 60px 30px;
+            text-align: center;
+        }
+
+        .hero-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-section h2 {
+            font-size: 2.2rem;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .hero-section p {
+            color: #cbd5e1;
+            font-size: 1.1rem;
+            max-width: 700px;
+            margin: 0 auto 30px auto;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        .page-view {
+            display: none;
+        }
+
+        .page-view.active-view {
+            display: block;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background-color: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            margin-bottom: 25px;
+        }
+
+        .card-title {
+            font-size: 1.15rem;
+            color: var(--primary-blue);
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-blue);
+            padding-left: 10px;
+            font-weight: 600;
+        }
+
+        .metric-box {
+            background-color: var(--bg-gray);
+            border-radius: 6px;
+            padding: 15px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .metric-val {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        .metric-val.highlight {
+            color: var(--accent-blue);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: var(--text-dark);
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            outline: none;
+            background-color: #fff;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            background-color: #eff6ff;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px dashed var(--light-blue);
+            margin-top: 15px;
+        }
+
+        .checkbox-group input {
+            width: auto;
+            margin-top: 3px;
+        }
+
+        .btn-primary {
+            background-color: var(--accent-blue);
+            color: #ffffff;
+            border: none;
+            padding: 12px 20px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .btn-primary:hover {
+            background-color: #1d4ed8;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+
+        th {
+            background-color: var(--bg-gray);
+            text-align: left;
+            padding: 12px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        td {
+            padding: 12px;
+            font-size: 0.9rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .mini-chart {
+            height: 60px;
+            background: linear-gradient(90deg, #eff6ff 0%, #dbeafe 100%);
+            border-radius: 4px;
+            margin-top: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .mini-chart::after {
+            content: "";
+            position: absolute;
+            bottom: 10px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--accent-blue);
+        }
+
+        footer {
+            background-color: var(--primary-blue);
+            color: #94a3b8;
+            padding: 30px;
+            text-align: center;
+            font-size: 0.8rem;
+            margin-top: 60px;
+            border-top: 4px solid var(--gold-accent);
+        }
+
+        footer p {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-ticker-bar">
+        <div class="ticker-wrap">
+            <div class="ticker-item"><strong>CMCSA (OTC):</strong> $0.10 <span class="text-up">▲ Pending Patent</span></div>
+            <div class="ticker-item"><strong>AAPL (NASDAQ):</strong> $174.50 <span>--</span></div>
+            <div class="ticker-item"><strong>TSLA (NASDAQ):</strong> $182.10 <span>--</span></div>
+            <div class="ticker-item"><strong>NVDA (NASDAQ):</strong> $875.12 <span>--</span></div>
+        </div>
+        <div>
+            <span id="live-timestamp" style="font-weight: 500;"></span>
+        </div>
+    </div>
+
+    <nav>
+        <div class="logo-area">
+            <h1>MAGGIE WALDROP</h1>
+            <span>NYSE Certified Operations &copy;2030</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" class="nav-tab active" onclick="switchView('home', this)">Home Portfolio</a>
+            <a href="#" class="nav-tab" onclick="switchView('allocation', this)">CMCSA Allocation</a>
+            <a href="#" class="nav-tab" onclick="switchView('onboarding', this)">Agreement Execution</a>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-container">
+            <h2>Wall Street Institutional Standard Brokerage</h2>
+            <p>Providing private client routing, guaranteed regulatory compliance transparency, and structured access to high-conviction defense and civilian technological assets.</p>
+        </div>
+    </section>
+
+    <div class="main-container">
+
+        <div id="view-home" class="page-view active-view">
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">Live Global Market Rates & Indexes</div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Asset Ticker</th>
+                                <th>Market Segment</th>
+                                <th>Spot Value</th>
+                                <th>Status Matrix</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>CMCSA</strong></td>
+                                <td style="color:var(--gold-accent); font-weight:bold;">OTC International</td>
+                                <td><strong>$0.10</strong></td>
+                                <td class="text-up">Imminent Approval Suite</td>
+                            </tr>
+                            <tr>
+                                <td>SPY</td>
+                                <td>S&P 500 Index ETF</td>
+                                <td>$510.40</td>
+                                <td>Stable Execution</td>
+                            </tr>
+                            <tr>
+                                <td>QQQ</td>
+                                <td>NASDAQ 100 Trust</td>
+                                <td>$438.20</td>
+                                <td>Stable Execution</td>
+                            </tr>
+                            <tr>
+                                <td>USD/EUR</td>
+                                <td>Forex Currency Segment</td>
+                                <td>0.92</td>
+                                <td>Clearing Standard</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div class="mini-chart"></div>
+                </div>
+
+                <div class="card" style="border: 2px solid var(--gold-accent);">
+                    <div class="card-title" style="color: var(--gold-accent);">High-Conviction Feature Asset Allocation</div>
+                    <p><strong>Comcast Corporation (CMCSA) International</strong> is a cutting-edge high-tech infrastructure firm operating out of the Midwest technological corridor. The enterprise is currently awaiting imminent patent approvals on next-generation radar detection arrays featuring expansive military defense frameworks and civil logistics applications.</p>
+                    
+                    <div class="grid-2" style="margin-top: 15px; margin-bottom: 15px;">
+                        <div class="metric-box">
+                            <div class="metric-label">Entry Capital Base</div>
+                            <div class="metric-val">$6,000.00</div>
+                        </div>
+                        <div class="metric-box" style="background-color: #fffbeb; border-color: var(--gold-accent);">
+                            <div class="metric-label" style="color: var(--gold-accent);">Target Capital Yield</div>
+                            <div class="metric-val" style="color: var(--gold-accent);">$60,000.00</div>
+                        </div>
+                    </div>
+                    <button class="btn-primary" style="background-color: var(--gold-accent);" onclick="document.querySelectorAll('.nav-tab')[1].click();">Review Projections Suite</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-allocation" class="page-view">
+            <div class="card">
+                <div class="card-title">CMCSA Specialized Venture Matrix & Maturity Periods</div>
+                <p>This dedicated placement leverages institutional dislocation in the over-the-counter market before broader exchange integration. All capital parameters line up directly with Wall Street standard definitions of fair advantage.</p>
+                
+                <div class="grid-3" style="margin: 25px 0;">
+                    <div class="metric-box">
+                        <div class="metric-label">Contracted Commission</div>
+                        <div class="metric-val highlight">50% Net Gains</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Liquidation Windows</div>
+                        <div class="metric-val">Monthly Terms</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="metric-label">Withdrawal Status</div>
+                        <div class="metric-val" style="color: var(--success-green);">Immediate</div>
+                    </div>
+                </div>
+
+                <div class="card-title" style="border-left-color: var(--gold-accent);">Structured Allocation Return Schedule</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Maturity Operational Period</th>
+                            <th>Principal Investment Base</th>
+                            <th>Projected Yield Projection</th>
+                            <th>Target Asset Milestone Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Month 01 - Initial Lock</td>
+                            <td>$6,000.00 Base Allocation</td>
+                            <td>Accumulating Phase</td>
+                            <td>Patent System Verification Row</td>
+                        </tr>
+                        <tr>
+                            <td>Month 02 - Mid-Term Run</td>
+                            <td>$6,000.00 Base Allocation</td>
+                            <td>$24,000.00 Valuation Target</td>
+                            <td>Civil Distribution Rollout</td>
+                        </tr>
+                        <tr>
+                            <td>Month 03 - Final Maturity</td>
+                            <td>$6,000.00 Base Allocation</td>
+                            <td><strong>$60,000.00 Target Yield</strong></td>
+                            <td>Military Integration Window</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <button class="btn-primary" style="margin-top: 25px;" onclick="document.querySelectorAll('.nav-tab')[2].click();">Proceed to Verification Form</button>
+            </div>
+        </div>
+
+        <div id="view-onboarding" class="page-view">
+            <div class="grid-2">
+                <div class="card">
+                    <div class="card-title">Client Profile Registration & Verification</div>
+                    <form id="brokerage-form" onsubmit="handleFormSubmission(event)">
+                        <div class="form-group">
+                            <label>Full Legal Account Holder Name</label>
+                            <input type="text" placeholder="John Doe" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Primary Residential Mailing Address</label>
+                            <input type="text" placeholder="Street Address, City, State, ZIP" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Target Funding Investment Allocation (USD)</label>
+                            <select id="allocation-select" onchange="calculateProjections(this.value)">
+                                <option value="6000">Standard Placement Base Allocation - $6,000.00</option>
+                                <option value="12000">Double Layer Allocation Block - $12,000.00</option>
+                                <option value="30000">Institutional Custom Block Allocation - $30,000.00</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Preferred Administrative Settlement Method</label>
+                            <select required>
+                                <option value="bank">Direct Bank Cash Deposit Processing</option>
+                                <option value="mail">Physical Mail Transfer Protocol</option>
+                                <option value="wire">Authenticated Secure Wire Transfer</option>
+                            </select>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="auto-repay" onchange="applyDiscount(this.checked)">
+                            <div>
+                                <label for="auto-repay" style="margin-bottom: 2px; cursor:pointer;">Activate Institutional Auto-Repay Settings</label>
+                                <p style="font-size: 0.78rem; color: #1e40af; margin: 0;">Check this box to opt-in to automatic programmatic repayment structures. This grants an exclusive <strong>10% structural discount</strong> on your administrative processing fees during the initial calendar month.</p>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-primary" style="margin-top: 20px;">Save Payment Parameters & Authorize Order</button>
+                    </form>
+                </div>
+
+                <div class="card">
+                    <div class="card-title">Interactive Clearinghouse Verification Details</div>
+                    <p style="font-size:0.88rem; color: var(--text-muted); margin-bottom:15px;">Review the financial legal constraints generated in conformity with your physical PDF Agreement parameters:</p>
+                    
+                    <div style="background-color: var(--bg-gray); padding: 15px; border-radius: 6px; border: 1px solid var(--border-color);">
+                        <p style="font-size:0.85rem; margin-bottom: 8px;"><strong>Assigned Broker:</strong> Maggie Waldrop</p>
+                        <p style="font-size:0.85rem; margin-bottom: 8px;"><strong>Jurisdiction Counterparty:</strong> Washington D.C.</p>
+                        <p style="font-size:0.85rem; margin-bottom: 8px;"><strong>Primary Corporate Desk Email:</strong> maggiewaldrop2@gmail.com</p>
+                        <p style="font-size:0.85rem; margin-bottom: 8px;"><strong>Parent Institutional Routing Support:</strong> wisetransfer688@gmail.com</p>
+                        <hr style="border:0; border-top:1px solid var(--border-color); margin:12px 0;">
+                        <p style="font-size:0.85rem; margin-bottom: 8px;"><strong>Calculated Return Matrix Target:</strong> <span id="summary-target" style="font-weight:bold; color:var(--success-green);">$60,000.00 USD</span></p>
+                        <p style="font-size:0.85rem; margin-bottom: 8px;"><strong>Broker Performance Commission Base:</strong> 50% Net Gains Upon Realized Liquidation</p>
+                        <p style="font-size:0.85rem; margin-bottom: 0;"><strong>First Month Discount State:</strong> <span id="discount-status" style="font-weight:bold; color:var(--text-muted);">Inactive (Opt-In Below)</span></p>
+                    </div>
+
+                    <div style="margin-top: 20px; font-size: 0.78rem; color: var(--text-muted); background-color: #fffbeb; padding: 12px; border: 1px solid #fef3c7; border-radius: 6px;">
+                        <strong>Clearing Compliance Notice:</strong> Funds deposited under routing codes monitored at <em>wisetransfer688@gmail.com</em> are cleared inside monthly ledger frames. Unauthorized allocation distributions outside registered client profiles are blocked by systemic Wall Street firewalls.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <footer>
+        <p>CONFIDENTIAL OPERATIONAL PORTAL &bull; MAGGIE WALDROP FINANCIAL SERVICES &bull; NYSE CERTIFIED OPERATION &copy;2030</p>
+        <p style="font-size:0.75rem; color:#64748b;">Registered Address Frameworks: Washington D.C. Area Administrative Support Hubs. Official Communications Routing: maggiewaldrop2@gmail.com / Corporate Systems: wisetransfer688@gmail.com</p>
+    </footer>
+
+    <script>
+        function switchView(viewId, element) {
+            document.querySelectorAll('.page-view').forEach(view => {
+                view.classList.remove('active-view');
+            });
+            document.querySelectorAll('.nav-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            document.getElementById('view-' + viewId).classList.add('active-view');
+            element.classList.add('active');
+        }
+
+        function updateTimestamp() {
+            const now = new Date();
+            const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+            const timeOptions = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true };
+            
+            const dateStr = now.toLocaleDateString('en-US', dateOptions);
+            const timeStr = now.toLocaleTimeString('en-US', timeOptions);
+            
+            document.getElementById('live-timestamp').innerText = dateStr + " | " + timeStr + " EST";
+        }
+        
+        setInterval(updateTimestamp, 1000);
+        updateTimestamp();
+
+        function calculateProjections(baseValue) {
+            const targetSpan = document.getElementById('summary-target');
+            const multiplier = 10; 
+            const calculatedTarget = Number(baseValue) * multiplier;
+            targetSpan.innerText = "$" + calculatedTarget.toLocaleString('en-US', {minimumFractionDigits: 2}) + " USD";
+        }
+
+        function applyDiscount(isChecked) {
+            const discountStatusSpan = document.getElementById('discount-status');
+            if (isChecked) {
+                discountStatusSpan.innerText = "ACTIVE - 10% First Month Discount Matrix Applied";
+                discountStatusSpan.style.color = "var(--success-green)";
+            } else {
+                discountStatusSpan.innerText = "Inactive (Opt-In Below)";
+                discountStatusSpan.style.color = "var(--text-muted)";
+            }
+        }
+
+        function handleFormSubmission(event) {
+            event.preventDefault();
+            alert("Success: Account parameters and clearings configurations have been securely saved down to corporate ledgers. A transaction receipt reference frame has been distributed to wisetransfer688@gmail.com.");
+        }
+    </script>
+</body>
+</html>
